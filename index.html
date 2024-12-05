@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doom Launcher</title>
-    <link rel="stylesheet" href="style.css">
+    <title>DOOM Launcher</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to WAD Runner for Doom</h1>
-        <p>Select a WAD file to play Doom!</p>
-    </header>
-
-    <main>
-        <h2>Choose a WAD to Play</h2>
-        <ul>
-            <li><a href="doom.html">DOOM (Original)</a></li>
-            <li><a href="doom2.html">DOOM 2</a></li>
-            <li><a href="custom.html">Load a Custom WAD</a></li>
-        </ul>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 WAD Runner. Doom is a trademark of id Software.</p>
-    </footer>
+    <div class="menu">
+        <h1>DOOM Launcher</h1>
+        <button onclick="window.location.href='doom.html'">Play DOOM</button>
+        <button onclick="window.location.href='doom2.html'">Play DOOM 2</button>
+        <button onclick="window.location.href='custom.html'">Launch Custom WAD</button>
+        <br/>
+        <button onclick="window.location.href='https://www.doomworld.com/'">DOOM World</button>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Doom Launcher | Made for fans of DOOM | <a href="https://www.doomworld.com">Visit Doom World</a></p>
+    </div>
 </body>
 </html>
