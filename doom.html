@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOOM - Doom Launcher</title>
-    <script src="js/doom.js"></script> <!-- Include your Doom JS engine -->
+    <style type="text/css">
+        .dosbox-container { width: 640px; height: 400px; }
+        .dosbox-container > .dosbox-overlay { background: url(https://js-dos.com/cdn/DOOM.png); }
+    </style>
 </head>
 <body>
     <header>
@@ -12,25 +15,26 @@
     </header>
 
     <main>
-        <div id="doom-container">
-            <canvas id="doom-canvas"></canvas>
-        </div>
-        <p>Enjoy the game!</p>
+        <div id="dosbox-container" class="dosbox-container"></div>
+        <button onclick="dosbox.requestFullScreen();">Make Fullscreen</button>
     </main>
 
+    <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
-        // Initialize Doom with the pre-loaded WAD
-        window.onload = () => {
-            const canvas = document.getElementById('doom-canvas');
-            const wadFile = 'wads/DOOM.wad'; // Path to your server's WAD file
-
-            // Assuming doom.js has a global method to load a WAD
-            initializeDoomGame(canvas, wadFile); // Replace with actual function from the JS engine
-        };
+        var dosbox = new Dosbox({
+            id: "dosbox-container",
+            onload: function (dosbox) {
+                // Load the pre-loaded DOOM WAD (DOOM-@evilution.zip contains DOOM.WAD)
+                dosbox.run("wads/DOOM-@evilution.zip", "./doom");
+            },
+            onrun: function (dosbox, app) {
+                console.log("App '" + app + "' is running");
+            }
+        });
     </script>
 
     <footer>
-        <p>&copy; 2024 WAD Runner. Doom is a trademark of id Software.</p>
+        <p>&copy; 2024 Doom Launcher. Doom is a trademark of id Software.</p>
     </footer>
 </body>
 </html>
