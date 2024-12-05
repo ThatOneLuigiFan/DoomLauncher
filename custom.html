@@ -28,7 +28,7 @@
         var dosbox;
 
         // Initialize Dosbox container
-        function initializeDosbox(wadFileName) {
+        function initializeDosbox() {
             if (dosbox) {
                 dosbox.destroy(); // Destroy any existing instance
             }
@@ -37,8 +37,8 @@
                 id: "dosbox-container",
                 onload: function(dosbox) {
                     console.log("Loaded js-dos, ready to run WAD.");
-                    // Run the uploaded WAD file
-                    dosbox.run(wadFileName, "DOOM.EXE");
+                    // Mount the virtual file system and run the game
+                    dosbox.run("C:\\DOOM\\DOOM.EXE"); // Running DOOM.EXE from the mounted ZIP
                 },
                 onrun: function(dosbox, app) {
                     console.log("App '" + app + "' is running");
@@ -66,16 +66,20 @@
                         var zip = new JSZip();
                         zip.loadAsync(wadData).then(function(contents) {
                             var wadFile = zip.file("DOOM.WAD");
-                            if (wadFile) {
-                                // Upload the WAD file to js-dos
-                                wadFile.async("blob").then(function(content) {
-                                    // Create a virtual file system and load the WAD into it
-                                    var wadBlob = content;
-                                    dosbox.loadFile(wadBlob);
-                                    initializeDosbox("DOOM.WAD");
+                            var exeFile = zip.file("DOOM.EXE");
+
+                            if (wadFile && exeFile) {
+                                // Create a virtual file system and upload the WAD and EXE files
+                                zip.file("DOOM.WAD").async("blob").then(function(content) {
+                                    dosbox.loadFile(content, "C:\\DOOM\\DOOM.WAD"); // Mount the WAD file
+                                });
+
+                                zip.file("DOOM.EXE").async("blob").then(function(content) {
+                                    dosbox.loadFile(content, "C:\\DOOM\\DOOM.EXE"); // Mount the EXE file
+                                    initializeDosbox(); // Run the game after loading the files
                                 });
                             } else {
-                                console.error("DOOM.WAD not found in the ZIP file");
+                                console.error("Missing DOOM.WAD or DOOM.EXE in the ZIP file");
                             }
                         }).catch(function(error) {
                             console.error("Error loading ZIP file:", error);
@@ -84,7 +88,7 @@
                         // It's a .wad file, handle it directly
                         var blob = new Blob([wadData], { type: "application/octet-stream" });
                         dosbox.loadFile(blob);
-                        initializeDosbox(file.name);
+                        initializeDosbox();
                     }
                 };
 
