@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOOM 2 - Doom Launcher</title>
+    <script src="js/doom.js"></script> <!-- Include your Doom JS engine -->
+</head>
+<body>
+    <header>
+        <h1>Playing DOOM 2</h1>
+    </header>
+
+    <main>
+        <div id="doom-container">
+            <canvas id="doom-canvas"></canvas>
+        </div>
+        <p>Enjoy the game!</p>
+    </main>
+
+    <script>
+        // Initialize Doom 2 with the pre-loaded WAD
+        window.onload = () => {
+            const canvas = document.getElementById('doom-canvas');
+            const wadFile = 'wads/DOOM2.wad'; // Path to your server's WAD file
+
+            // Assuming doom.js has a global method to load a WAD
+            initializeDoomGame(canvas, wadFile); // Replace with actual function from the JS engine
+        };
+    </script>
+
+    <footer>
+        <p>&copy; 2024 WAD Runner. Doom is a trademark of id Software.</p>
+    </footer>
+</body>
+</html>
