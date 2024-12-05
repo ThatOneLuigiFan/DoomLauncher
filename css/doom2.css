@@ -1,8 +1,13 @@
 /* Global Styles */
+@font-face {
+    font-family: 'DooMFont';
+    src: url('graphics/DooM.ttf') format('truetype');
+}
+
 body {
     background: url('graphics/background.jpeg') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'DooMFont', cursive; /* Use custom DOOM font */
     color: #ffcc00;
     text-shadow: 2px 2px 4px #000000;
     margin: 0;
