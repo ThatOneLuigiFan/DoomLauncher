@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom WAD - Doom Launcher</title>
-    <script src="js/doom.js"></script> <!-- Include your Doom JS engine -->
+    <style type="text/css">
+        .dosbox-container { width: 640px; height: 400px; }
+        .dosbox-container > .dosbox-overlay { background: url(https://js-dos.com/cdn/DOOM.png); }
+    </style>
 </head>
 <body>
     <header>
@@ -14,15 +17,17 @@
 
     <main>
         <div>
-            <input type="file" id="wad-upload" accept=".wad">
+            <input type="file" id="wad-upload" accept=".zip">
             <button onclick="loadCustomWad()">Play Custom WAD</button>
         </div>
-        <div id="doom-container">
-            <canvas id="doom-canvas"></canvas>
-        </div>
+        <div id="dosbox-container" class="dosbox-container"></div>
+        <button onclick="dosbox.requestFullScreen();">Make Fullscreen</button>
     </main>
 
+    <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
+        var dosbox;
+
         function loadCustomWad() {
             const fileInput = document.getElementById('wad-upload');
             const file = fileInput.files[0];
@@ -31,20 +36,25 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const wadData = e.target.result;
-                    const canvas = document.getElementById('doom-canvas');
-
-                    // Initialize Doom with the uploaded WAD file
-                    initializeDoomGame(canvas, wadData);
+                    dosbox = new Dosbox({
+                        id: "dosbox-container",
+                        onload: function (dosbox) {
+                            dosbox.run(wadData, "./custom");
+                        },
+                        onrun: function (dosbox, app) {
+                            console.log("App '" + app + "' is running");
+                        }
+                    });
                 };
-                reader.readAsArrayBuffer(file); // Read the file as an ArrayBuffer
+                reader.readAsDataURL(file); // Read the file as a DataURL (binary format)
             } else {
-                alert("Please select a WAD file to upload.");
+                alert("Please select a WAD file.");
             }
         }
     </script>
 
     <footer>
-        <p>&copy; 2024 WAD Runner. Doom is a trademark of id Software.</p>
+        <p>&copy; 2024 Doom Launcher. Doom is a trademark of id Software.</p>
     </footer>
 </body>
 </html>
