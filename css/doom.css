@@ -2,9 +2,9 @@
 body {
     background: url('https://www.doomworld.com/uploads/monthly_07_2018/post-47382-0-41026700-1531282486.jpg') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'Press Start 2P', cursive; /* Retro DOOM font */
+    font-family: 'Press Start 2P', cursive;
     color: #ffcc00;
-    text-shadow: 2px 2px 4px #000000; /* Shadow for text for more contrast */
+    text-shadow: 2px 2px 4px #000000;
     margin: 0;
     height: 100vh;
     display: flex;
@@ -15,7 +15,7 @@ body {
 .menu {
     text-align: center;
     border: 5px solid #ffcc00;
-    padding: 30px;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-shadow: 0 0 10px 2px rgba(255, 204, 0, 0.5);
@@ -48,17 +48,4 @@ button:hover {
     border: 3px solid #ffcc00;
     color: #fff;
     box-shadow: 0 0 10px 3px rgba(255, 153, 0, 0.7);
-}
-
-.footer {
-    font-size: 0.8em;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.footer a {
-    color: #ffcc00;
-    text-decoration: none;
 }
