@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom WAD - Doom Launcher</title>
+    <script src="js/doom.js"></script> <!-- Include your Doom JS engine -->
+</head>
+<body>
+    <header>
+        <h1>Play Custom WAD</h1>
+        <p>Upload your custom WAD file and play Doom directly in the browser!</p>
+    </header>
+
+    <main>
+        <div>
+            <input type="file" id="wad-upload" accept=".wad">
+            <button onclick="loadCustomWad()">Play Custom WAD</button>
+        </div>
+        <div id="doom-container">
+            <canvas id="doom-canvas"></canvas>
+        </div>
+    </main>
+
+    <script>
+        function loadCustomWad() {
+            const fileInput = document.getElementById('wad-upload');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const wadData = e.target.result;
+                    const canvas = document.getElementById('doom-canvas');
+
+                    // Initialize Doom with the uploaded WAD file
+                    initializeDoomGame(canvas, wadData);
+                };
+                reader.readAsArrayBuffer(file); // Read the file as an ArrayBuffer
+            } else {
+                alert("Please select a WAD file to upload.");
+            }
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2024 WAD Runner. Doom is a trademark of id Software.</p>
+    </footer>
+</body>
+</html>
