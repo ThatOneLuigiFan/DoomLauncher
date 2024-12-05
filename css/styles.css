@@ -2,42 +2,52 @@
 body {
     background: url('https://www.doomworld.com/uploads/monthly_07_2018/post-47382-0-41026700-1531282486.jpg') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'Press Start 2P', cursive;
-    color: white;
+    font-family: 'Press Start 2P', cursive; /* Retro DOOM font */
+    color: #ffcc00;
+    text-shadow: 2px 2px 4px #000000; /* Shadow for text for more contrast */
+    margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
 }
 
 .menu {
     text-align: center;
-    border: 5px solid #ff9900;
-    padding: 20px;
+    border: 5px solid #ffcc00;
+    padding: 30px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
-    box-shadow: 0 0 10px 2px rgba(255, 153, 0, 0.5);
+    box-shadow: 0 0 10px 2px rgba(255, 204, 0, 0.5);
 }
 
 h1 {
     font-size: 3em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 button {
     font-size: 1.5em;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #ff9900;
-    border: none;
-    border-radius: 5px;
+    margin: 20px 10px;
+    padding: 15px 40px;
+    background-color: #ffcc00;
+    border: 3px solid #ff9900;
+    color: #000;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #ff6600;
+    background-color: #ff9900;
+    border: 3px solid #ffcc00;
+    color: #fff;
+    box-shadow: 0 0 10px 3px rgba(255, 153, 0, 0.7);
 }
 
 .footer {
@@ -49,5 +59,6 @@ button:hover {
 }
 
 .footer a {
-    color: #ff9900;
+    color: #ffcc00;
+    text-decoration: none;
 }
