@@ -23,11 +23,12 @@
     </main>
 
     <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.8.0/jszip.min.js"></script>
     <script>
         var dosbox;
-        
+
         // Initialize Dosbox container
-        function initializeDosbox(file) {
+        function initializeDosbox(wadFileName) {
             if (dosbox) {
                 dosbox.destroy(); // Destroy any existing instance
             }
@@ -37,7 +38,7 @@
                 onload: function(dosbox) {
                     console.log("Loaded js-dos, ready to run WAD.");
                     // Run the uploaded WAD file
-                    dosbox.run(file, "DOOM.EXE");
+                    dosbox.run(wadFileName, "DOOM.EXE");
                 },
                 onrun: function(dosbox, app) {
                     console.log("App '" + app + "' is running");
@@ -54,29 +55,40 @@
 
             if (file) {
                 var reader = new FileReader();
-                
+
                 // Read the file as an ArrayBuffer (needed for js-dos)
                 reader.onload = function(e) {
                     var wadData = e.target.result;
 
-                    // Convert the file to a virtual file system for DOSBox
-                    var fs = new JSZip();
-                    fs.loadAsync(wadData).then(function(zip) {
-                        // Upload the file to js-dos
-                        var wadFileName = file.name.toLowerCase().endsWith('.zip') ? file.name : 'DOOM.WAD';
-                        var wadFile = zip.file(wadFileName);
-
-                        if (wadFile) {
-                            // Create a temporary file system for the WAD
-                            fs.file(wadFileName).async("blob").then(function(content) {
-                                // Start DOSBox with the WAD content
-                                var wadBlob = content;
-                                dosbox.loadFile(wadBlob);
-                                initializeDosbox(wadFileName);
-                            });
-                        }
-                    });
+                    // Check if it's a ZIP file
+                    if (file.name.toLowerCase().endsWith('.zip')) {
+                        // It's a ZIP file, so we need to extract it using JSZip
+                        var zip = new JSZip();
+                        zip.loadAsync(wadData).then(function(contents) {
+                            var wadFile = zip.file("DOOM.WAD");
+                            if (wadFile) {
+                                // Upload the WAD file to js-dos
+                                wadFile.async("blob").then(function(content) {
+                                    // Create a virtual file system and load the WAD into it
+                                    var wadBlob = content;
+                                    dosbox.loadFile(wadBlob);
+                                    initializeDosbox("DOOM.WAD");
+                                });
+                            } else {
+                                console.error("DOOM.WAD not found in the ZIP file");
+                            }
+                        }).catch(function(error) {
+                            console.error("Error loading ZIP file:", error);
+                        });
+                    } else {
+                        // It's a .wad file, handle it directly
+                        var blob = new Blob([wadData], { type: "application/octet-stream" });
+                        dosbox.loadFile(blob);
+                        initializeDosbox(file.name);
+                    }
                 };
+
+                // Read the file as ArrayBuffer
                 reader.readAsArrayBuffer(file);
             }
         });
