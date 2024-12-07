@@ -1,13 +1,13 @@
 /* Global Styles */
 @font-face {
-    font-family: 'DooMFont';
-    src: url('graphics/DooM.ttf') format('truetype');
+    font-family: 'DoomMenuFont';
+    src: url('DooM.ttf') format('truetype');
 }
 
 body {
     background: url('../graphics/background.jpeg') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'DooMFont', cursive; /* Use custom DOOM font */
+    font-family: 'DoomMenuFont', cursive; /* Use custom DOOM font */
     color: #ffcc00;
     text-shadow: 2px 2px 4px #000000;
     margin: 0;
