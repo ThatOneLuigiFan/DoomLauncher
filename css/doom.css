@@ -9,7 +9,7 @@ body {
     background-size: cover;
     font-family: 'DoomMenuFont', cursive; /* Use custom DOOM font */
     color: #ffcc00;
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px #000000; /* Shadow for text for more contrast */
     margin: 0;
     height: 100vh;
     display: flex;
@@ -20,7 +20,7 @@ body {
 .menu {
     text-align: center;
     border: 5px solid #ffcc00;
-    padding: 20px;
+    padding: 30px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-shadow: 0 0 10px 2px rgba(255, 204, 0, 0.5);
@@ -53,4 +53,17 @@ button:hover {
     border: 3px solid #ffcc00;
     color: #fff;
     box-shadow: 0 0 10px 3px rgba(255, 153, 0, 0.7);
+}
+
+.footer {
+    font-size: 0.8em;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer a {
+    color: #ffcc00;
+    text-decoration: none;
 }
