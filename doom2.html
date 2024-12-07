@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOOM 2 - Doom Launcher</title>
-    <link rel="stylesheet" href="css/doom2.css">
+    <title>DOOM 2 - Game</title>
+    <link rel="stylesheet" href="css/doom.css">
 </head>
 <body>
-    <header>
-        <h1>Playing DOOM 2</h1>
-    </header>
-
-    <main>
-        <div id="dosbox-container" class="dosbox-container"></div>
-        <button onclick="dosbox.requestFullScreen();">Make Fullscreen</button>
-    </main>
+    <div class="menu">
+        <h1>Loading DOOM 2...</h1>
+        <div id="dosbox-container" style="width: 640px; height: 400px;"></div>
+        <button onclick="window.location.href='index.html'">Back to Launcher</button>
+    </div>
 
     <script src="https://js-dos.com/cdn/js-dos-api.js"></script>
     <script>
         var dosbox = new Dosbox({
-            id: "dosbox-container",
-            onload: function (dosbox) {
-                dosbox.run("wads/DOOM2.zip", "DOOM2.EXE");
+            id: 'dosbox-container',
+            onload: function() {
+                dosbox.run('wads/DOOM2.zip', 'DOOM2.EXE');
             },
-            onrun: function (dosbox, app) {
-                console.log("App '" + app + "' is running");
+            onrun: function(dosbox, app) {
+                console.log('DOOM is running...');
             }
         });
     </script>
-
+    
     <footer>
         <p>&copy; 2024 Doom Launcher. Doom is a trademark of id Software.</p>
     </footer>
 </body>
 </html>
+
+    
+
