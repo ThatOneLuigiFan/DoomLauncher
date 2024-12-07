@@ -1,7 +1,7 @@
 /* Global Styles */
 @font-face {
     font-family: 'DooMFont';
-    src: url('graphics/DooM.ttf') format('truetype');
+    src: url('../graphics/DooM.ttf') format('truetype');
 }
 
 body {
